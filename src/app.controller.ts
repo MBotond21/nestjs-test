@@ -37,7 +37,7 @@ export class AppController {
   @Render('topAuthor')
   TopAuthor() {
 
-    var authors = new Map
+    let authors = new Map
 
     for (let i = 0; i < quotes.quotes.length; i++) {
       if (authors.has(quotes.quotes[i].author)){
