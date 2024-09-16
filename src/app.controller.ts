@@ -48,6 +48,8 @@ export class AppController {
       }
     }
 
+    authors = new Map([...authors.entries()].sort((a, b) => b[1] - a[1]));
+
     return {
       response: authors
     };
