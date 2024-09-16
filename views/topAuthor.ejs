@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Authors</title>
+</head>
+<body>
+    <table>
+        <% var keys = response.keys() %>
+        <% var values = response.values() %>
+        <% for (let i = 0; i < response.size; i++) { %>
+            <tr>
+                <td> <%= keys.next().value %> </td>
+                <td> <%= values.next().value %> </td>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>

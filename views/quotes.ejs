@@ -6,6 +6,10 @@
     <title>Quotes</title>
 </head>
 <body>
-    
+    <ul>
+        <% for (let i = 0; i < response.quotes.length; i++) { %>
+            <li><%= response.quotes[i].quote %> - <%= response.quotes[i].author %></li>
+        <%}%>
+    </ul>
 </body>
 </html>
