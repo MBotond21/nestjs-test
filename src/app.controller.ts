@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Render } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Render } from '@nestjs/common';
 import { AppService } from './app.service';
 import { quotes } from './quotes';
 import { map } from 'rxjs';
@@ -62,6 +62,11 @@ export class AppController {
       qoute: quotes.quotes[parseInt(id)-1].quote,
       author: quotes.quotes[parseInt(id)-1].author
     }
+  }
+
+  @Delete('deleteQuote/:id')
+  deleteQuote(@Param('id') id: string){
+    return `${id} is deleted`;
   }
 
 }
