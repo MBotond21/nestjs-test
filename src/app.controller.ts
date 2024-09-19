@@ -1,4 +1,4 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get, Param, Render } from '@nestjs/common';
 import { AppService } from './app.service';
 import { quotes } from './quotes';
 import { map } from 'rxjs';
@@ -54,4 +54,14 @@ export class AppController {
       response: authors
     };
   };
+
+  @Get('quotes/:id')
+  @Render('qoute')
+  oneQuote(@Param('id') id: string){
+    return {
+      qoute: quotes.quotes[parseInt(id)-1].quote,
+      author: quotes.quotes[parseInt(id)-1].author
+    }
+  }
+
 }
