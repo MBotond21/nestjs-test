@@ -64,8 +64,9 @@ export class AppController {
     }
   }
 
-  @Delete('deleteQuote/:id')
+  @Get('deleteQuote/:id')
   deleteQuote(@Param('id') id: string){
+    quotes.quotes.splice(parseInt(id));
     return `${id} is deleted`;
   }
 
