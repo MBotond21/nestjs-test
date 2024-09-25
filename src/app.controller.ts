@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Param, Render } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Query, Render } from '@nestjs/common';
 import { AppService } from './app.service';
 import { quotes } from './quotes';
 import { map } from 'rxjs';
@@ -68,6 +68,49 @@ export class AppController {
   deleteQuote(@Param('id') id: string){
     quotes.quotes.splice(parseInt(id));
     return `${id} is deleted`;
+  }
+
+  @Get('search')
+  @Render('searchInQuotes')
+  getQuoteByPart(@Query('text') text: string = " "){
+    let qs = [];
+    for (let i = 0; i < quotes.quotes.length; i++) {
+      if(quotes.quotes[i].quote.toLocaleLowerCase().includes(text.toLocaleLowerCase())){
+        qs.push(quotes.quotes[i].quote);
+      }
+    }
+
+    return {
+      list: qs
+    }
+  }
+
+  @Get('authorRandomForm')
+  @Render('authorRandomForm')
+  dontKnow(){ }
+
+  @Get('authorRandom')
+  @Render('authorRandom')
+  getRandomQuoteByAuthor(@Query('author') author: string){ 
+
+    try{
+      return {
+        quote: quotes.quotes.find((e) => e.author == author).quote
+      }
+    }
+    catch(e){
+      return {
+        quote: "Nincs ilyen szerző"
+      }
+    }
+  }
+
+  @Get('highlight:id')
+  @Render('highlight')
+  makeHighlight(@Param('id') id: string, @Query('text') text: string){
+    return{
+      text: quotes.quotes[parseInt(id)-1].quote.replace(new RegExp(text, 'gi'), `<strong>${text}</strong>`)
+    }
   }
 
 }
